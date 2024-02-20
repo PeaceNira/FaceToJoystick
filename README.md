@@ -6,6 +6,7 @@ FaceToJoystick is a tool allowing you to use your head as a joystick, similiar t
 
 - Python 3.x
 - OpenCV (`opencv-python` package)
+- Numpy
 - vgamepad library (for virtual joystick control)
 - Webcam (built-in or external) for capturing facial movements
 
@@ -20,7 +21,7 @@ git clone https://github.com/PeaceNira/FaceToJoystick.git
 2. Install the required Python packages:
 
 ```
-pip install opencv-python vgamepad
+pip install opencv-python vgamepad numpy
 ```
 
 3. Connect your webcam to your computer.
