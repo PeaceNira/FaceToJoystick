@@ -1,4 +1,6 @@
 import cv2
+import os
+import sys
 import vgamepad as vg
 from FaceDetection import detect_face
 import JoystickControl
@@ -46,6 +48,9 @@ def main():
             constants.initial_face_y = None
         elif key == ord("q"):
             break
+        elif key == ord("s"):
+            os.execv(sys.executable, ['python'] + sys.argv)
+            
 
     cap.release()
     cv2.destroyAllWindows()
