@@ -1,18 +1,5 @@
 import numpy as np
 
-buffer_size = 5
-joystick_buffer_x = np.zeros(buffer_size)
-joystick_buffer_y = np.zeros(buffer_size)
-buffer_index = 0
-
-
-def smooth_joystick_value(value, buffer):
-    global buffer_index
-    buffer[buffer_index] = value
-    buffer_index = (buffer_index + 1) % len(buffer)
-    return np.median(buffer)
-
-
 def map_face_to_joystick(
     frame_width,
     frame_height,

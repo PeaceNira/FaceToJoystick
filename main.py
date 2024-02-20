@@ -8,22 +8,19 @@ import numpy as np
 gamepad = vg.VX360Gamepad()
 
 # Configuration parameters
-deadzone_threshold_x = 25
-deadzone_threshold_y = 25
-sensitivity_y = 10
+deadzone_threshold_x = 20
+deadzone_threshold_y = 20
+sensitivity_y = 5
 sensitivity_x = 5
+smoothing_factor = 0.2
 
 # Initialize face tracking parameters
 initial_face_x = None
 initial_face_y = None
 
-# Smoothing parameters
-smoothing_factor = 0.2  # Adjust this value for desired smoothing effect
-
 # Initialize smoothed joystick values
 smoothed_joystick_value_x = 0.0
 smoothed_joystick_value_y = 0.0
-
 
 def process_frame(frame):
     global initial_face_x, initial_face_y, smoothed_joystick_value_x, smoothed_joystick_value_y
@@ -75,12 +72,14 @@ def process_frame(frame):
             sensitivity_y,
         )
 
-        # Smooth joystick values using the function imported from JoystickControl
-        smoothed_joystick_value_x = JoystickControl.smooth_joystick_value(
-            joystick_value_x, JoystickControl.joystick_buffer_x
+        # Smooth joystick values using exponential moving average
+        smoothed_joystick_value_x = (
+            smoothing_factor * joystick_value_x
+            + (1 - smoothing_factor) * smoothed_joystick_value_x
         )
-        smoothed_joystick_value_y = JoystickControl.smooth_joystick_value(
-            joystick_value_y, JoystickControl.joystick_buffer_y
+        smoothed_joystick_value_y = (
+            smoothing_factor * joystick_value_y
+            + (1 - smoothing_factor) * smoothed_joystick_value_y
         )
 
         # Control gamepad with smoothed joystick values
@@ -94,7 +93,9 @@ def process_frame(frame):
 
 
 def display_text(frame, text, y):
-    cv2.putText(frame, text, (20, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+    cv2.putText(
+        frame, text, (20, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2
+    )
 
 
 def main():
