@@ -34,13 +34,11 @@ def detect_face(frame):
     # If no previous points, use Haar cascade for face detection
     if prev_points is None:
         return detect_faces_with_cascade(frame, gray_frame)
-
-    # Calculate optical flow to track face movement
-    if good_new := calculate_optical_flow(gray_frame):
-        prev_points, prev_gray = update_previous_points(good_new, gray_frame)
-        return convert_to_bounding_boxes(good_new)
-    else:
+    
+    if not (good_new := calculate_optical_flow(gray_frame)):
         return expand_search_area(gray_frame)
+    update_previous_points(good_new, gray_frame)
+    return convert_to_bounding_boxes(good_new)
 
 
 def calculate_optical_flow(gray_frame):
