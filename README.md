@@ -1,6 +1,6 @@
 # FaceToJoystick
 
-FaceToJoystick is a tool allowing you to use your head as a joystick, similiar to opentrack but more compatable with linux. I developed this as i could not get opentrack to work on my system (fedora 39).
+FaceToJoystick is a tool allowing you to use your head as a joystick, similiar to opentrack but more compatable with linux.
 
 ## Requirements
 
