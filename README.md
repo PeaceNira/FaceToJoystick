@@ -14,7 +14,7 @@ FaceToJoystick is a tool allowing you to use your head as a joystick, similiar t
 1. Clone the repository to your local machine:
 
 ```
-git clone https://github.com/your_username/FaceToJoystick.git
+git clone https://github.com/PeaceNira/FaceToJoystick.git
 ```
 
 2. Install the required Python packages:
