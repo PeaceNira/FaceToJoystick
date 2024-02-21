@@ -102,7 +102,8 @@ def update_joystick_values(frame, face_x, face_y):
 def process_frame(frame):
     """Process each frame."""
     # Rotate the frame
-    frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    if constants.rotate_camera:   
+        frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
 
     # Detect faces in the frame
     faces = detect_face(frame)

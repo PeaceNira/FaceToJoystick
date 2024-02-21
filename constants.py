@@ -4,6 +4,7 @@ deadzone_threshold_y = 20
 sensitivity_y = 5
 sensitivity_x = 5
 smoothing_factor = 1.0
+rotate_camera = False
 
 # Initialize face tracking parameters
 initial_face_x = None
