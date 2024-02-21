@@ -44,6 +44,8 @@ python main.py
 
 6. The X output is Controller axis 4, and the Y output is axis 5.
 
+7.  Constants contain options you can edit to your desire, or when the application is launched via the GUI.
+
 ## Contributing
 
 Contributions are welcome and am hoping to build this project into a good linux alternative to opentrack. 
