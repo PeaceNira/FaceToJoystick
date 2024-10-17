@@ -2,7 +2,7 @@ import cv2
 from FaceDetection import detect_face
 from JoystickControl import map_face_to_joystick
 import vgamepad as vg
-import constants
+import variables
 
 # Initialize the gamepad
 gamepad = vg.VX360Gamepad()
@@ -18,16 +18,16 @@ def display_joystick_info(frame):
     """Display joystick information on the frame."""
     # Information about joystick values, deadzone, and sensitivity
     joystick_info = [
-        (f"Joystick Value (X): {constants.smoothed_joystick_value_x:.2f}", 40),
-        (f"Joystick Value (Y): {constants.smoothed_joystick_value_y:.2f}", 80),
+        (f"Joystick Value (X): {variables.smoothed_joystick_value_x:.2f}", 40),
+        (f"Joystick Value (Y): {variables.smoothed_joystick_value_y:.2f}", 80),
         (
-            f"Joystick Deadzone (X, Y): {constants.deadzone_threshold_x:.2f}, "
-            f"{constants.deadzone_threshold_y:.2f}",
+            f"Joystick Deadzone (X, Y): {variables.deadzone_threshold_x:.2f}, "
+            f"{variables.deadzone_threshold_y:.2f}",
             120,
         ),
         (
-            f"Joystick Sensitivity (X, Y): {constants.sensitivity_x:.2f}, "
-            f"{constants.sensitivity_y:.2f}",
+            f"Joystick Sensitivity (X, Y): {variables.sensitivity_x:.2f}, "
+            f"{variables.sensitivity_y:.2f}",
             160,
         ),
     ]
@@ -58,9 +58,9 @@ def draw_face(frame, x, y, w, h):
 
 def update_initial_face_position(face_x, face_y):
     """Update the initial position of the face."""
-    if constants.initial_face_x is None or constants.initial_face_y is None:
-        constants.initial_face_x = face_x
-        constants.initial_face_y = face_y
+    if variables.initial_face_x is None or variables.initial_face_y is None:
+        variables.initial_face_x = face_x
+        variables.initial_face_y = face_y
 
 
 def update_joystick_values(frame, face_x, face_y):
@@ -71,30 +71,30 @@ def update_joystick_values(frame, face_x, face_y):
         frame.shape[0],
         face_x,
         face_y,
-        constants.initial_face_y,
-        constants.initial_face_x,
-        constants.deadzone_threshold_x,
-        constants.deadzone_threshold_y,
-        constants.sensitivity_x,
-        constants.sensitivity_y,
+        variables.initial_face_y,
+        variables.initial_face_x,
+        variables.deadzone_threshold_x,
+        variables.deadzone_threshold_y,
+        variables.sensitivity_x,
+        variables.sensitivity_y,
     )
 
     # Smooth joystick values using exponential moving average
-    constants.smoothed_joystick_value_x = (
-        constants.smoothing_factor * joystick_value_x
-        + (1 - constants.smoothing_factor) *
-        constants.smoothed_joystick_value_x
+    variables.smoothed_joystick_value_x = (
+        variables.smoothing_factor * joystick_value_x
+        + (1 - variables.smoothing_factor) *
+        variables.smoothed_joystick_value_x
     )
-    constants.smoothed_joystick_value_y = (
-        constants.smoothing_factor * joystick_value_y
-        + (1 - constants.smoothing_factor) *
-        constants.smoothed_joystick_value_y
+    variables.smoothed_joystick_value_y = (
+        variables.smoothing_factor * joystick_value_y
+        + (1 - variables.smoothing_factor) *
+        variables.smoothed_joystick_value_y
     )
 
     # Control the gamepad with smoothed joystick values
     gamepad.right_joystick_float(
-        x_value_float=constants.smoothed_joystick_value_x,
-        y_value_float=constants.smoothed_joystick_value_y,
+        x_value_float=variables.smoothed_joystick_value_x,
+        y_value_float=variables.smoothed_joystick_value_y,
     )
     gamepad.update()
 
@@ -102,7 +102,7 @@ def update_joystick_values(frame, face_x, face_y):
 def process_frame(frame):
     """Process each frame."""
     # Rotate the frame
-    if constants.rotate_camera:   
+    if variables.rotate_camera:   
         frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
 
     # Detect faces in the frame

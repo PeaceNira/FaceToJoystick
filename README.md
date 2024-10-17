@@ -53,3 +53,7 @@ Contributions are welcome and am hoping to build this project into a good linux 
 ## License
 
 This project is licensed under the MIT license. See the [LICENSE](LICENSE) file for details.
+
+## Known Issues:
+
+Drastic changes in light will cause the face to bounce around, so will extremely dark/light settings.
